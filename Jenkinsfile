@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("josemanuelcrv/docker-proyect")
+        app = docker.build("josemanuelCRV/docker-proyect")
     }
 
 
