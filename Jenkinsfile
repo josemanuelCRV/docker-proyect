@@ -1,11 +1,23 @@
 node {
-    checkout scm
+    def app
 
-    docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
+    stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
 
-        def customImage = docker.build("josemanuelcrv/docker-proyect:${env.BUILD_ID}")
+        checkout scm
+    }
 
-        /* Push the container to the custom Registry */
-        customImage.push()
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+        app = docker.build("josemanuelcrv/docker-proyect")
+    }
+
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")*/
+            app.push("latest")
+        }
     }
 }
