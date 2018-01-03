@@ -11,8 +11,6 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-	sh 'echo $PATH'sh 'echo $PATH'
-
         app = docker.build("josemanuelcrv/docker-proyect")
     }
 
